@@ -1,0 +1,33 @@
+name: Python CI
+
+on:
+  push:
+    paths:
+      - 'robocore-api-python/**'
+  pull_request:
+    paths:
+      - 'robocore-api-python/**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+
+      - name: Install Python deps
+        working-directory: robocore-api-python
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Run tests
+        working-directory: robocore-api-python
+        run: pytest
+
+      - name: Lint
+        working-directory: robocore-api-python
+        run: flake8 robocore_api
