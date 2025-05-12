@@ -2,11 +2,9 @@ name: Python CI
 
 on:
   push:
-    paths:
-      - 'robocore-api-python/**'
+    branches: [ main ]
   pull_request:
-    paths:
-      - 'robocore-api-python/**'
+    branches: [ main ]
 
 jobs:
   test:
