@@ -61,7 +61,7 @@ robocore-cli forward ws://your-robot.local:8765 1.2
 Development
 -----------
 # Clone the repo (or unzip the SDK folder)
-git clone https://github.com/RoboCoreERC/robocore-api.git
+git clone https://github.com/RoboCoreERC/robocore-api-complete.git
 cd robocore-api
 
 # Create a venv & install dev dependencies
