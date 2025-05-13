@@ -11,7 +11,6 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -22,15 +21,17 @@ jobs:
           python-version: '3.9'
 
       - name: Install dependencies
-        working-directory: robocore-api-python
         run: |
           python -m pip install --upgrade pip
-          pip install -e ".[dev]"
+          # install dev dependencies first
+          python -m pip install -r robocore-api-python/requirements-dev.txt
+          # then install your SDK package itself
+          python -m pip install "./robocore-api-python[dev]"
 
       - name: Run tests
-        working-directory: robocore-api-python
-        run: pytest --maxfail=1 --disable-warnings -q
+        run: |
+          pytest robocore-api-python/tests --maxfail=1 --disable-warnings -q
 
       - name: Lint
-        working-directory: robocore-api-python
-        run: flake8 robocore_api
+        run: |
+          flake8 robocore-api-python/robocore_api
